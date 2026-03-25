@@ -5,6 +5,8 @@ const app = express ();
 
 const PORT = process.env.PORT || 3000;
 
+app.use(express.json()); // Middleware to parse JSON bodies
+
 //Fake Databases
 const tasks = [
   {id: 1, task: "Learn JavaScript basics", status: "pending"},
@@ -41,24 +43,28 @@ app.get("/tasks/:id", (req, res) => {
 
 
 
+// Update a task by ID
+app.patch("/task/:id", (req, res) => {
+  const taskId = parseInt(req.params.id); // Convert id from string to number
+  const { task, status } = req.body; 
 
+  const existingTask = tasks.find(t => t.id === taskId);
 
+  // If task with the given ID does not exist, return 404
+  if (!existingTask) {
+    return res.status(404).json({ message: "Task not found" });
+  }
 
+  //Update only provided fields
+  if (task) existingTask.task = task;
+  if (status) existingTask.status = status;
 
+  res.status(200).json({
+    message: "Task updated successfully",
+    data: existingTask
+  });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+});
 
 
 
