@@ -10,14 +10,14 @@ const tasks = [
   {id: 1, task: "Learn JavaScript basics", status: "pending"},
   {id: 2, task: "Build Task Manager API", status: "pending"},
   {id: 3, task: "Test API with Postman", status: "completed"},
-  { id: 4, task: "Push project to GitHub", status: "pending"},
+  {id: 4, task: "Push project to GitHub", status: "pending"},
   {id: 5, task: "Review backend concepts", status: "completed"},
 ];
 
 
-
-
-
+app.get("/tasks", (req, res) => {
+  res.status(200).json(tasks); // Send the list of tasks as a JSON response
+});
 
 
 
