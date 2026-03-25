@@ -20,6 +20,21 @@ app.get("/tasks", (req, res) => {
 });
 
 
+// Get a single task by ID
+app.get("/tasks/:id", (req, res) => {
+  const taskId = parseInt(req.params.id); // Convert id from string to number
+
+  const task = tasks.find(t => t.id === taskId); // Find the task with matching ID
+
+  if (!task) {
+    return res.status(404).json({ message: "Task not found" });
+  }
+
+  res.status(200).json(task); // Return the task
+});
+
+
+
 
 
 
