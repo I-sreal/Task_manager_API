@@ -33,14 +33,7 @@ app.get("/tasks/:id", (req, res) => {
   }
 
   res.status(200).json(task); // Return the task
-});
-
-
-
-
-
-
-
+})
 
 
 // Update a task by ID
@@ -67,8 +60,18 @@ app.patch("/task/:id", (req, res) => {
 });
 
 
+// Delete; Remove user
+app.delete("/task/:id", (req, res) => {
+  const taskId = parseInt(req.params.id);
+  const initialLength = tasks.length;
 
+  tasks = tasks.filter(t => t.id !== taskId); 
 
+  if (tasks.length === initialLength) 
+    return res.status(404).json({ message: "Task not found" });
+  
+  res.status(204).send()
+});
 
 
 
