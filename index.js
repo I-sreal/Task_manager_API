@@ -36,6 +36,26 @@ app.get("/tasks/:id", (req, res) => {
 })
 
 
+// Create a new task
+app.post("/tasks", (req, res) => {
+  const { task, status } = req.body;
+  if (!task) {
+    return res.status(400).json({message: '"task" field is required'})
+  }
+  const newTask = {
+    id: tasks.length + 1, // Auto-generate ID
+    task: task,          // From request body
+    status: status || "pending" // Default to "pending" if not provided
+  }
+  tasks.push(newTask);   // Add to the fake database
+
+  res.status(201).json({
+    message: "Task created successfully",
+    data: newTask
+  });
+});
+
+
 // Update a task by ID
 app.patch("/task/:id", (req, res) => {
   const taskId = parseInt(req.params.id); // Convert id from string to number
