@@ -37,7 +37,7 @@ app.get("/tasks/:id", (req, res) => {
 
 
 // Create a new task
-app.post("/tasks", (req, res) => {
+app.post("/tasks", (req, res) => 
   const { task, status } = req.body;
   if (!task) {
     return res.status(400).json({message: '"task" field is required'})
