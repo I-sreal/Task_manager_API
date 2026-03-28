@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json()); // Middleware to parse JSON bodies
 
 //Fake Databases
-const tasks = [
+let tasks = [
   {id: 1, task: "Learn JavaScript basics", status: "pending"},
   {id: 2, task: "Build Task Manager API", status: "pending"},
   {id: 3, task: "Test API with Postman", status: "completed"},
